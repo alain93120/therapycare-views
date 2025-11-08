@@ -52,6 +52,8 @@ class Practitioner(BaseModel):
     description: Optional[str] = ""
     phone: Optional[str] = ""
     schedule: Optional[str] = "Lun-Ven 9h-18h"
+    address: Optional[str] = ""
+    city: Optional[str] = ""
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class PractitionerPublic(BaseModel):
@@ -61,6 +63,8 @@ class PractitionerPublic(BaseModel):
     description: str
     phone: str
     schedule: str
+    address: str
+    city: str
 
 class PractitionerUpdate(BaseModel):
     full_name: Optional[str] = None
@@ -68,6 +72,8 @@ class PractitionerUpdate(BaseModel):
     description: Optional[str] = None
     phone: Optional[str] = None
     schedule: Optional[str] = None
+    address: Optional[str] = None
+    city: Optional[str] = None
 
 class Patient(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -76,12 +82,20 @@ class Patient(BaseModel):
     full_name: str
     email: EmailStr
     phone: str
+    notes: Optional[str] = ""
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class PatientCreate(BaseModel):
     full_name: str
     email: EmailStr
     phone: str
+    notes: Optional[str] = ""
+
+class PatientUpdate(BaseModel):
+    full_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    phone: Optional[str] = None
+    notes: Optional[str] = None
 
 class Appointment(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -106,6 +120,10 @@ class AppointmentCreate(BaseModel):
 class TokenResponse(BaseModel):
     token: str
     practitioner: PractitionerPublic
+
+class SearchQuery(BaseModel):
+    specialty: Optional[str] = None
+    city: Optional[str] = None
 
 # Helper functions
 def hash_password(password: str) -> str:
@@ -180,6 +198,17 @@ async def login(input: PractitionerLogin):
     )
 
 # Public routes
+@api_router.get("/public/practitioners", response_model=List[PractitionerPublic])
+async def search_practitioners(specialty: Optional[str] = None, city: Optional[str] = None):
+    query = {}
+    if specialty:
+        query['specialty'] = {"$regex": specialty, "$options": "i"}
+    if city:
+        query['city'] = {"$regex": city, "$options": "i"}
+    
+    practitioners = await db.practitioners.find(query, {"_id": 0, "password": 0}).to_list(100)
+    return [PractitionerPublic(**p) for p in practitioners]
+
 @api_router.get("/public/practitioner/{practitioner_id}", response_model=PractitionerPublic)
 async def get_public_practitioner(practitioner_id: str):
     practitioner = await db.practitioners.find_one({"id": practitioner_id}, {"_id": 0, "password": 0})
@@ -225,7 +254,8 @@ async def create_patient(input: PatientCreate, current_user: dict = Depends(get_
         practitioner_id=current_user['id'],
         full_name=input.full_name,
         email=input.email,
-        phone=input.phone
+        phone=input.phone,
+        notes=input.notes or ""
     )
     
     doc = patient.model_dump()
@@ -233,6 +263,39 @@ async def create_patient(input: PatientCreate, current_user: dict = Depends(get_
     
     await db.patients.insert_one(doc)
     return patient
+
+@api_router.put("/patients/{patient_id}", response_model=Patient)
+async def update_patient(patient_id: str, input: PatientUpdate, current_user: dict = Depends(get_current_user)):
+    # Verify patient belongs to current user
+    patient = await db.patients.find_one({"id": patient_id, "practitioner_id": current_user['id']}, {"_id": 0})
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient not found")
+    
+    update_data = {k: v for k, v in input.model_dump().items() if v is not None}
+    
+    if update_data:
+        await db.patients.update_one(
+            {"id": patient_id},
+            {"$set": update_data}
+        )
+    
+    updated = await db.patients.find_one({"id": patient_id}, {"_id": 0})
+    if isinstance(updated.get('created_at'), str):
+        updated['created_at'] = datetime.fromisoformat(updated['created_at'])
+    
+    return Patient(**updated)
+
+@api_router.delete("/patients/{patient_id}")
+async def delete_patient(patient_id: str, current_user: dict = Depends(get_current_user)):
+    result = await db.patients.delete_one({
+        "id": patient_id,
+        "practitioner_id": current_user['id']
+    })
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Patient not found")
+    
+    return {"message": "Patient deleted"}
 
 # Protected routes - Appointments
 @api_router.get("/appointments", response_model=List[Appointment])

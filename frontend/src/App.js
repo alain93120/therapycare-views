@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import PublicProfile from './pages/PublicProfile';
@@ -23,19 +24,19 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/praticien/:id" element={<PublicProfile />} />
           <Route
-            path="/dashboard"
+            path="/app"
             element={
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
             }
           >
-            <Route index element={<Navigate to="/dashboard/agenda" replace />} />
+            <Route index element={<Navigate to="/app/agenda" replace />} />
             <Route path="agenda" element={<Agenda />} />
             <Route path="profil" element={<Profile />} />
             <Route path="patients" element={<Patients />} />
