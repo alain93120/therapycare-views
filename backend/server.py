@@ -229,6 +229,24 @@ async def get_public_practitioner(practitioner_id: str):
         raise HTTPException(status_code=404, detail="Practitioner not found")
     return PractitionerPublic(**practitioner)
 
+@api_router.post("/contact")
+async def submit_contact(input: ContactMessageCreate):
+    contact_message = ContactMessage(
+        name=input.name,
+        email=input.email,
+        message=input.message
+    )
+    
+    doc = contact_message.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    
+    await db.contact_messages.insert_one(doc)
+    
+    # Here you could also send an email notification
+    # For now, we just store it in the database
+    
+    return {"message": "Message received successfully", "id": contact_message.id}
+
 # Protected routes - Practitioner
 @api_router.get("/practitioner/profile", response_model=Practitioner)
 async def get_profile(current_user: dict = Depends(get_current_user)):
