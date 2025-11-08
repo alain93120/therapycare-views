@@ -6,6 +6,7 @@ import { Label } from '../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
+import { Plus, Trash2, Calendar as CalendarIcon, Clock } from 'lucide-react';
 import { toast } from 'sonner';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -113,32 +114,37 @@ const Agenda = () => {
 
   const sortedDates = Object.keys(appointmentsByDate).sort();
 
+  // Get upcoming appointments (next 7 days)
+  const today = new Date().toISOString().split('T')[0];
+  const upcomingDates = sortedDates.filter(date => date >= today).slice(0, 7);
+
   return (
-    <div className="max-w-6xl mx-auto" data-testid="agenda-page">
+    <div className="max-w-6xl" data-testid="agenda-page">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Agenda</h1>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Mon Agenda</h1>
+          <p className="text-gray-600 mt-1">{appointments.length} rendez-vous enregistré(s)</p>
+        </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button
               data-testid="add-appointment-button"
-              className="rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg transition-all duration-200"
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg h-11"
             >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Ajouter un rendez-vous
+              <Plus className="w-5 h-5 mr-2" />
+              Nouveau rendez-vous
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="sm:max-w-[500px]">
             <DialogHeader>
               <DialogTitle>Nouveau rendez-vous</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4 mt-4">
               <div className="space-y-2">
-                <Label htmlFor="patient_id">Patient</Label>
+                <Label htmlFor="patient_id">Patient *</Label>
                 {patients.length > 0 ? (
                   <Select onValueChange={handlePatientSelect} value={formData.patient_id}>
-                    <SelectTrigger data-testid="patient-select">
+                    <SelectTrigger data-testid="patient-select" className="h-11">
                       <SelectValue placeholder="Sélectionner un patient" />
                     </SelectTrigger>
                     <SelectContent>
@@ -150,12 +156,12 @@ const Agenda = () => {
                     </SelectContent>
                   </Select>
                 ) : (
-                  <p className="text-sm text-gray-500">Aucun patient. Ajoutez-en un d'abord.</p>
+                  <p className="text-sm text-gray-500 bg-gray-50 p-3 rounded-lg">Aucun patient. <a href="/app/patients" className="text-blue-600 hover:underline">Ajoutez-en un d'abord</a></p>
                 )}
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="date">Date</Label>
+                  <Label htmlFor="date">Date *</Label>
                   <Input
                     id="date"
                     name="date"
@@ -164,10 +170,11 @@ const Agenda = () => {
                     value={formData.date}
                     onChange={handleChange}
                     required
+                    className="h-11"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="time">Heure</Label>
+                  <Label htmlFor="time">Heure *</Label>
                   <Input
                     id="time"
                     name="time"
@@ -176,21 +183,24 @@ const Agenda = () => {
                     value={formData.time}
                     onChange={handleChange}
                     required
+                    className="h-11"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="duration">Durée (minutes)</Label>
-                <Input
-                  id="duration"
-                  name="duration"
-                  type="number"
-                  data-testid="appointment-duration-input"
-                  value={formData.duration}
-                  onChange={handleChange}
-                  min="15"
-                  step="15"
-                />
+                <Label htmlFor="duration">Durée (minutes) *</Label>
+                <Select onValueChange={(val) => setFormData(prev => ({ ...prev, duration: parseInt(val) }))} value={formData.duration.toString()}>
+                  <SelectTrigger data-testid="duration-select" className="h-11">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="30">30 minutes</SelectItem>
+                    <SelectItem value="45">45 minutes</SelectItem>
+                    <SelectItem value="60">1 heure</SelectItem>
+                    <SelectItem value="90">1h30</SelectItem>
+                    <SelectItem value="120">2 heures</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="notes">Notes (optionnel)</Label>
@@ -200,16 +210,17 @@ const Agenda = () => {
                   data-testid="appointment-notes-input"
                   value={formData.notes}
                   onChange={handleChange}
-                  placeholder="Notes..."
+                  placeholder="Première consultation, suivi..."
+                  className="h-11"
                 />
               </div>
               <Button
                 type="submit"
                 data-testid="submit-appointment-button"
                 disabled={loading || !formData.patient_id}
-                className="w-full rounded-full bg-blue-500 hover:bg-blue-600 text-white"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white h-11 rounded-lg"
               >
-                {loading ? 'Ajout...' : 'Ajouter'}
+                {loading ? 'Ajout...' : 'Ajouter le rendez-vous'}
               </Button>
             </form>
           </DialogContent>
@@ -217,15 +228,74 @@ const Agenda = () => {
       </div>
 
       {sortedDates.length === 0 ? (
-        <Card className="text-center p-12">
-          <p className="text-gray-500">Aucun rendez-vous prévu</p>
+        <Card className="text-center py-16 shadow-md border-0">
+          <CalendarIcon className="w-16 h-16 mx-auto text-gray-300 mb-4" />
+          <p className="text-gray-500 mb-4">Aucun rendez-vous programmé</p>
+          <Button
+            onClick={() => setDialogOpen(true)}
+            variant="outline"
+            className="border-gray-300"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Planifier votre premier rendez-vous
+          </Button>
         </Card>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-4">
+          {/* Stats Cards */}
+          <div className="grid md:grid-cols-3 gap-4 mb-6">
+            <Card className="shadow-md border-0">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600">Aujourd'hui</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">
+                      {appointmentsByDate[today]?.length || 0}
+                    </p>
+                  </div>
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <CalendarIcon className="w-6 h-6 text-blue-600" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-md border-0">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600">Cette semaine</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">
+                      {upcomingDates.reduce((sum, date) => sum + appointmentsByDate[date].length, 0)}
+                    </p>
+                  </div>
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Clock className="w-6 h-6 text-green-600" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-md border-0">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600">Total</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">{appointments.length}</p>
+                  </div>
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <CalendarIcon className="w-6 h-6 text-purple-600" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Appointments List */}
           {sortedDates.map((date) => (
-            <Card key={date} className="shadow-md">
-              <CardHeader className="bg-blue-50">
-                <CardTitle className="text-lg text-blue-700">
+            <Card key={date} className="shadow-md border-0">
+              <CardHeader className="bg-gray-50 border-b border-gray-200 py-4">
+                <CardTitle className="text-base font-semibold text-gray-900">
                   {new Date(date + 'T00:00:00').toLocaleDateString('fr-FR', {
                     weekday: 'long',
                     year: 'numeric',
@@ -242,28 +312,37 @@ const Agenda = () => {
                       <div
                         key={apt.id}
                         data-testid={`appointment-${apt.id}`}
-                        className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+                        className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-200 hover:shadow-sm transition-all"
                       >
                         <div className="flex-1">
-                          <div className="flex items-center space-x-3">
-                            <span className="font-semibold text-blue-600">{apt.time}</span>
-                            <span className="text-gray-800 font-medium">{apt.patient_name}</span>
-                            <span className="text-sm text-gray-500">({apt.duration} min)</span>
+                          <div className="flex items-center space-x-4">
+                            <div className="flex items-center justify-center w-16 h-16 bg-blue-50 rounded-lg">
+                              <div className="text-center">
+                                <p className="text-lg font-bold text-blue-600">{apt.time}</p>
+                              </div>
+                            </div>
+                            <div className="flex-1">
+                              <p className="text-base font-semibold text-gray-900">{apt.patient_name}</p>
+                              <div className="flex items-center space-x-3 mt-1 text-sm text-gray-600">
+                                <span className="flex items-center">
+                                  <Clock className="w-3 h-3 mr-1" />
+                                  {apt.duration} min
+                                </span>
+                                {apt.notes && (
+                                  <span className="text-gray-500">• {apt.notes}</span>
+                                )}
+                              </div>
+                            </div>
                           </div>
-                          {apt.notes && (
-                            <p className="text-sm text-gray-600 mt-1">{apt.notes}</p>
-                          )}
                         </div>
                         <Button
                           data-testid={`delete-appointment-${apt.id}`}
                           onClick={() => handleDelete(apt.id)}
                           variant="ghost"
                           size="sm"
-                          className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50 ml-4"
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                          </svg>
+                          <Trash2 className="w-5 h-5" />
                         </Button>
                       </div>
                     ))}
