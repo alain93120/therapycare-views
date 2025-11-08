@@ -63,8 +63,8 @@ class PractitionerPublic(BaseModel):
     description: str
     phone: str
     schedule: str
-    address: str
-    city: str
+    address: str = ""
+    city: str = ""
 
 class PractitionerUpdate(BaseModel):
     full_name: Optional[str] = None
