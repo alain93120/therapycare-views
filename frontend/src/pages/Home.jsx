@@ -186,9 +186,9 @@ const Home = () => {
             <div>
               <h4 className="font-semibold text-gray-900 mb-4">À propos</h4>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-blue-600">Qui sommes-nous</a></li>
-                <li><a href="#" className="hover:text-blue-600">CGU</a></li>
-                <li><a href="#" className="hover:text-blue-600">Contact</a></li>
+                <li><Link to="/a-propos" className="hover:text-blue-600">Qui sommes-nous</Link></li>
+                <li><Link to="/a-propos#cgu" className="hover:text-blue-600">CGU</Link></li>
+                <li><Link to="/a-propos#contact" className="hover:text-blue-600">Contact</Link></li>
               </ul>
             </div>
           </div>
