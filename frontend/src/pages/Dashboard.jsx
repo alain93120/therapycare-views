@@ -96,11 +96,12 @@ const Dashboard = () => {
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 bg-white border-b border-gray-200 p-4 z-50">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <Calendar className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-bold text-gray-900">TherapyCare</span>
+          <div className="relative">
+            <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+              Therapy
+            </span>
+            <span className="text-lg font-bold text-gray-900">Care</span>
+            <div className="absolute -bottom-0.5 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></div>
           </div>
           <button
             data-testid="mobile-menu-button"
