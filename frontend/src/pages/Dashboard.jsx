@@ -38,14 +38,13 @@ const Dashboard = () => {
       {/* Sidebar Desktop */}
       <aside className="hidden md:flex md:flex-col md:w-64 bg-white border-r border-gray-200">
         <div className="p-6 border-b border-gray-200">
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-              <Calendar className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold text-gray-900">TherapyCare</h1>
-              <p className="text-xs text-gray-500">Espace pro</p>
-            </div>
+          <div className="relative">
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+              Therapy
+            </span>
+            <span className="text-xl font-bold text-gray-900">Care</span>
+            <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></div>
+            <p className="text-xs text-gray-500 mt-3">Espace pro</p>
           </div>
         </div>
         
