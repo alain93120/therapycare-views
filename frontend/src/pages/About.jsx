@@ -306,10 +306,13 @@ const About = () => {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-white" />
+                <div className="relative">
+                  <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+                    Therapy
+                  </span>
+                  <span className="text-lg font-bold text-gray-900">Care</span>
+                  <div className="absolute -bottom-0.5 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></div>
                 </div>
-                <span className="text-lg font-bold text-gray-900">TherapyCare</span>
               </div>
               <p className="text-gray-600 text-sm">La plateforme de prise de rendez-vous pour professionnels de santé</p>
             </div>
