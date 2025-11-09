@@ -43,6 +43,7 @@ function App() {
             <Route path="agenda" element={<Agenda />} />
             <Route path="profil" element={<Profile />} />
             <Route path="patients" element={<Patients />} />
+            <Route path="tarifs" element={<Pricing />} />
           </Route>
         </Routes>
       </BrowserRouter>
