@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Agenda from './pages/Agenda';
 import Patients from './pages/Patients';
+import Pricing from './pages/Pricing';
 import { Toaster } from './components/ui/sonner';
 import './App.css';
 
