@@ -30,6 +30,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/specialites" element={<SpecialtiesPage />} />
           <Route path="/recherche" element={<SearchPractitioners />} />
           <Route path="/a-propos" element={<About />} />
           <Route path="/register" element={<Register />} />
