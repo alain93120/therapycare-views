@@ -54,6 +54,7 @@ class Practitioner(BaseModel):
     schedule: Optional[str] = "Lun-Ven 9h-18h"
     address: Optional[str] = ""
     city: Optional[str] = ""
+    photo_url: Optional[str] = ""
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class PractitionerPublic(BaseModel):
