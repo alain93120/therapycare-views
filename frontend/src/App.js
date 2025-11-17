@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import PublicProfile from './pages/PublicProfile';
 import Dashboard from './pages/Dashboard';
+import Statistics from './pages/Statistics';
 import Profile from './pages/Profile';
 import Agenda from './pages/Agenda';
 import Patients from './pages/Patients';
