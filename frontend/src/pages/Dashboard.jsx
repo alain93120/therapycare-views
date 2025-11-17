@@ -26,7 +26,7 @@ const Dashboard = () => {
   const isActive = (path) => location.pathname.includes(path);
 
   const menuItems = [
-    { path: '/app', label: 'Accueil', icon: Home, exact: true },
+    { path: '/app/statistiques', label: 'Statistiques', icon: Home },
     { path: '/app/agenda', label: 'Agenda', icon: Calendar },
     { path: '/app/patients', label: 'Patients', icon: Users },
     { path: '/app/profil', label: 'Profil', icon: UserCircle },
