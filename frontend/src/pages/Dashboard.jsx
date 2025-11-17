@@ -35,11 +35,8 @@ const Dashboard = () => {
 
   const initials = user?.full_name?.split(' ').map(n => n[0]).join('').toUpperCase() || 'U';
 
-  const isExactActive = (path, exact) => {
-    if (exact) {
-      return location.pathname === path;
-    }
-    return location.pathname.includes(path);
+  const isExactActive = (path) => {
+    return location.pathname === path || location.pathname.includes(path);
   };
 
   return (
