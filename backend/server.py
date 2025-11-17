@@ -141,6 +141,16 @@ class ContactMessageCreate(BaseModel):
     email: EmailStr
     message: str
 
+class StatsResponse(BaseModel):
+    total_appointments: int
+    total_patients: int
+    upcoming_appointments: int
+    appointments_this_week: int
+    appointments_this_month: int
+    appointments_this_year: int
+    recent_appointments: List[dict]
+    appointments_by_day: List[dict]
+
 # Helper functions
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
