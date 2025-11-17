@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
+import SpecialtiesPage from './pages/SpecialtiesPage';
 import SearchPractitioners from './pages/SearchPractitioners';
 import Register from './pages/Register';
 import Login from './pages/Login';
