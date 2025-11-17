@@ -40,7 +40,8 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route index element={<Navigate to="/app/agenda" replace />} />
+            <Route index element={<Navigate to="/app/statistiques" replace />} />
+            <Route path="statistiques" element={<Statistics />} />
             <Route path="agenda" element={<Agenda />} />
             <Route path="profil" element={<Profile />} />
             <Route path="patients" element={<Patients />} />
