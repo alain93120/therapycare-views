@@ -11,8 +11,10 @@ const Home = () => {
   const [city, setCity] = useState('');
 
   const handleSearch = () => {
-    // Navigate to search results (could be implemented later)
-    console.log('Searching for:', { specialty, city });
+    const params = new URLSearchParams();
+    if (specialty) params.append('specialty', specialty);
+    if (city) params.append('city', city);
+    navigate(`/recherche?${params}`);
   };
 
   return (
