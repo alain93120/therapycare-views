@@ -66,7 +66,7 @@ class PractitionerPublic(BaseModel):
     schedule: str
     address: str = ""
     city: str = ""
-    photo_url: str
+    photo_url: Optional[str] = ""
 
 class PractitionerUpdate(BaseModel):
     full_name: Optional[str] = None
