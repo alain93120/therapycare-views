@@ -71,6 +71,9 @@ class PractitionerPublic(BaseModel):
     address: str = ""
     city: str = ""
     photo_url: Optional[str] = ""
+    rating: Optional[float] = 0.0
+    reviews_count: Optional[int] = 0
+    category: Optional[str] = ""
 
 class PractitionerUpdate(BaseModel):
     full_name: Optional[str] = None
