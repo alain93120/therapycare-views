@@ -13,6 +13,7 @@ from datetime import datetime, timezone, timedelta
 import bcrypt
 import jwt
 from categories import CATEGORIES, get_all_categories, get_category_by_slug, get_all_specialties
+from specialties_descriptions import SPECIALTIES_DESCRIPTIONS, get_specialty_description, get_specialties_by_category
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
