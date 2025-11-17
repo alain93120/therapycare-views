@@ -133,9 +133,13 @@ const Dashboard = () => {
           <div className="mt-4 pb-4">
             <div className="flex items-center space-x-3 px-3 py-3 bg-gray-50 rounded-xl mb-4">
               <Avatar className="w-10 h-10">
-                <AvatarFallback className="bg-gradient-to-br from-[#3FA9F5] to-[#6FD0C5] text-white text-sm font-medium">
-                  {initials}
-                </AvatarFallback>
+                {user?.photo_url ? (
+                  <AvatarImage src={user.photo_url} alt={user.full_name} />
+                ) : (
+                  <AvatarFallback className="bg-gradient-to-br from-[#3FA9F5] to-[#6FD0C5] text-white text-sm font-medium">
+                    {initials}
+                  </AvatarFallback>
+                )}
               </Avatar>
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-sm text-gray-900 truncate">{user?.full_name}</p>
