@@ -76,6 +76,7 @@ class PractitionerUpdate(BaseModel):
     schedule: Optional[str] = None
     address: Optional[str] = None
     city: Optional[str] = None
+    photo_url: Optional[str] = None
 
 class Patient(BaseModel):
     model_config = ConfigDict(extra="ignore")
