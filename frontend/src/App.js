@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
+import SearchPractitioners from './pages/SearchPractitioners';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import PublicProfile from './pages/PublicProfile';
