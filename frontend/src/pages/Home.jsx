@@ -35,6 +35,7 @@ const Home = () => {
             
             <nav className="hidden md:flex space-x-8">
               <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition">Accueil</Link>
+              <Link to="/specialites" className="text-gray-700 hover:text-blue-600 font-medium transition">Spécialités</Link>
               <a href="#how-it-works" className="text-gray-700 hover:text-blue-600 font-medium transition">Comment ça marche</a>
               <Link to="/register" className="text-gray-700 hover:text-blue-600 font-medium transition">Professionnels</Link>
             </nav>
