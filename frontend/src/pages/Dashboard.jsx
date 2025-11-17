@@ -146,7 +146,7 @@ const Dashboard = () => {
             <nav className="space-y-1">
               {menuItems.map((item) => {
                 const Icon = item.icon;
-                const active = isExactActive(item.path, item.exact);
+                const active = isExactActive(item.path);
                 return (
                   <Link
                     key={item.path}
