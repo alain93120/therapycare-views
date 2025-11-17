@@ -56,6 +56,9 @@ class Practitioner(BaseModel):
     address: Optional[str] = ""
     city: Optional[str] = ""
     photo_url: Optional[str] = ""
+    rating: Optional[float] = 0.0
+    reviews_count: Optional[int] = 0
+    category: Optional[str] = ""
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class PractitionerPublic(BaseModel):
