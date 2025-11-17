@@ -231,15 +231,49 @@ async def login(input: PractitionerLogin):
     )
 
 # Public routes
+@api_router.get("/categories")
+async def get_categories():
+    """Get all categories with their specialty count"""
+    return get_all_categories()
+
+@api_router.get("/categories/{category_slug}")
+async def get_category(category_slug: str):
+    """Get a specific category with all its specialties"""
+    category = get_category_by_slug(category_slug)
+    if not category:
+        raise HTTPException(status_code=404, detail="Category not found")
+    return category
+
+@api_router.get("/specialties")
+async def get_specialties():
+    """Get all specialties across all categories"""
+    return get_all_specialties()
+
 @api_router.get("/public/practitioners", response_model=List[PractitionerPublic])
-async def search_practitioners(specialty: Optional[str] = None, city: Optional[str] = None):
+async def search_practitioners(
+    specialty: Optional[str] = None, 
+    city: Optional[str] = None,
+    category: Optional[str] = None,
+    sort_by: Optional[str] = "rating"  # rating, reviews, name
+):
     query = {}
+    
     if specialty:
         query['specialty'] = {"$regex": specialty, "$options": "i"}
     if city:
         query['city'] = {"$regex": city, "$options": "i"}
+    if category:
+        query['category'] = category
     
-    practitioners = await db.practitioners.find(query, {"_id": 0, "password": 0}).to_list(100)
+    # Sorting
+    sort_field = "rating" if sort_by == "rating" else "reviews_count" if sort_by == "reviews" else "full_name"
+    sort_order = -1 if sort_by in ["rating", "reviews"] else 1
+    
+    practitioners = await db.practitioners.find(
+        query, 
+        {"_id": 0, "password": 0}
+    ).sort(sort_field, sort_order).to_list(100)
+    
     return [PractitionerPublic(**p) for p in practitioners]
 
 @api_router.get("/public/practitioner/{practitioner_id}", response_model=PractitionerPublic)
