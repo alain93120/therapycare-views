@@ -385,6 +385,89 @@ async def delete_appointment(appointment_id: str, current_user: dict = Depends(g
     
     return {"message": "Appointment deleted"}
 
+# Protected routes - Statistics
+@api_router.get("/stats")
+async def get_statistics(current_user: dict = Depends(get_current_user)):
+    from collections import defaultdict
+    
+    # Get all appointments
+    appointments = await db.appointments.find(
+        {"practitioner_id": current_user['id']},
+        {"_id": 0}
+    ).to_list(1000)
+    
+    # Get all patients
+    patients = await db.patients.find(
+        {"practitioner_id": current_user['id']},
+        {"_id": 0}
+    ).to_list(1000)
+    
+    # Current date
+    now = datetime.now(timezone.utc)
+    today = now.date()
+    
+    # Calculate stats
+    total_appointments = len(appointments)
+    total_patients = len(patients)
+    
+    # Count upcoming appointments
+    upcoming_appointments = 0
+    appointments_this_week = 0
+    appointments_this_month = 0
+    appointments_this_year = 0
+    
+    # Get week start (Monday)
+    week_start = today - timedelta(days=today.weekday())
+    month_start = today.replace(day=1)
+    year_start = today.replace(month=1, day=1)
+    
+    recent_appointments = []
+    appointments_by_day = defaultdict(int)
+    
+    for apt in appointments:
+        apt_date_str = apt['date']
+        apt_date = datetime.strptime(apt_date_str, '%Y-%m-%d').date()
+        
+        # Count by category
+        if apt_date >= today:
+            upcoming_appointments += 1
+        
+        if apt_date >= week_start and apt_date < week_start + timedelta(days=7):
+            appointments_this_week += 1
+        
+        if apt_date >= month_start:
+            appointments_this_month += 1
+        
+        if apt_date >= year_start:
+            appointments_this_year += 1
+        
+        # Group by day for chart
+        appointments_by_day[apt_date_str] += 1
+        
+        # Recent appointments (last 5)
+        if len(recent_appointments) < 5:
+            recent_appointments.append({
+                "id": apt['id'],
+                "patient_name": apt['patient_name'],
+                "date": apt['date'],
+                "time": apt['time']
+            })
+    
+    # Sort appointments by day
+    sorted_days = sorted(appointments_by_day.items())[-30:]  # Last 30 days
+    appointments_by_day_list = [{"date": date, "count": count} for date, count in sorted_days]
+    
+    return {
+        "total_appointments": total_appointments,
+        "total_patients": total_patients,
+        "upcoming_appointments": upcoming_appointments,
+        "appointments_this_week": appointments_this_week,
+        "appointments_this_month": appointments_this_month,
+        "appointments_this_year": appointments_this_year,
+        "recent_appointments": recent_appointments,
+        "appointments_by_day": appointments_by_day_list
+    }
+
 # Include router
 app.include_router(api_router)
 
