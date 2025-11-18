@@ -134,15 +134,15 @@ const SpecialtiesPage = () => {
                 <CardContent className="p-6">
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {details.specialties.map((specialty) => (
-                      <button
+                      <Link
                         key={specialty}
-                        onClick={() => handleSpecialtyClick(specialty)}
+                        to={`/specialite/${encodeURIComponent(specialty)}`}
                         className="flex items-center justify-between p-4 bg-gray-50 hover:bg-gradient-to-r hover:from-[#3FA9F5]/10 hover:to-[#6FD0C5]/10 rounded-xl transition-all group border border-transparent hover:border-[#3FA9F5]/30"
                         data-testid={`specialty-${specialty.toLowerCase().replace(/\s+/g, '-')}`}
                       >
                         <span className="text-gray-900 font-medium text-left">{specialty}</span>
                         <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#3FA9F5] transition-colors" />
-                      </button>
+                      </Link>
                     ))}
                   </div>
                 </CardContent>
