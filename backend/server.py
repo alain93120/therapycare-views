@@ -232,6 +232,19 @@ async def login(input: PractitionerLogin):
     )
 
 # Public routes
+@api_router.get("/specialties/{specialty_name}")
+async def get_specialty_detail(specialty_name: str):
+    """Get detailed description of a specialty"""
+    from urllib.parse import unquote
+    specialty_name = unquote(specialty_name)
+    description = get_specialty_description(specialty_name)
+    if not description:
+        raise HTTPException(status_code=404, detail="Specialty not found")
+    return {
+        "name": specialty_name,
+        **description
+    }
+
 @api_router.get("/categories")
 async def get_categories():
     """Get all categories with their specialty count"""
