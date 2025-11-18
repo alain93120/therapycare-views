@@ -101,3 +101,88 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "TherapyCare SaaS application for therapists with specialty detail pages"
+
+backend:
+  - task: "Specialty detail API endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "API endpoint /api/specialties/{specialty_name} already exists and returns specialty descriptions from specialties_descriptions.py. Tested with curl for Psychologue, Thérapeute ICV, and Neuropsychologue - all working correctly."
+
+  - task: "Specialty descriptions data"
+    implemented: true
+    working: true
+    file: "/app/backend/specialties_descriptions.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "20 specialty descriptions loaded from user PDF. Includes full descriptions, indications, methods, and categories. Missing 5 specialties (Constellations familiales, Hypnose spirituelle, Thérapie spirituelle, Thérapie holistique, Sophro-analyse) which were not in the PDF."
+
+frontend:
+  - task: "Dynamic route for specialty detail pages"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Added route /specialite/:name to App.js. Component SpecialtyDetail already existed and is now connected to the router."
+
+  - task: "Specialty detail page component"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/SpecialtyDetail.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Component displays specialty name, short description, full description, indications (blue badges), methods (green badges), CTA button to search practitioners, and practitioner count. Tested with Psychologue and Thérapeute de couple - both display correctly."
+
+  - task: "Links from specialties page to detail pages"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/SpecialtiesPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Replaced button elements with Link components pointing to /specialite/{specialty_name}. All specialty names are now clickable and navigate to their detail pages. Back button also works correctly."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: true
+
+test_plan:
+  current_focus:
+    - "Specialty detail pages end-to-end flow"
+    - "Navigation from specialties list to detail page"
+    - "Back button functionality"
+    - "Multiple specialties (test at least 5 different ones)"
+    - "Missing specialties handling (404 case)"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Completed P0 task: Specialty detail pages. Added dynamic route in App.js, converted specialty buttons to links in SpecialtiesPage.jsx. Backend API was already functional. Manually tested with screenshots: Psychologue and Thérapeute de couple pages display correctly with all information (title, descriptions, indications, methods, CTA button). Navigation and back button work correctly. Ready for comprehensive testing of all specialty pages and edge cases."
