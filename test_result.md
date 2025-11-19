@@ -197,7 +197,14 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Home page registration button update"
+    - "Registration choice page"
+    - "Client registration form"
+    - "Practitioner registration form"
+    - "Registration routing system"
+    - "Client registration API endpoint"
+    - "Practitioner registration API endpoint"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
