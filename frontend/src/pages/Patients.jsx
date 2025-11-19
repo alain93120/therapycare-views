@@ -120,6 +120,65 @@ const Patients = () => {
     setDialogOpen(true);
   };
 
+  const handleViewDetails = (patient) => {
+    setSelectedPatient(patient);
+    // Générer des données mock pour l'historique (à remplacer par API)
+    setPatientHistory({
+      appointments: [
+        { id: 1, date: '2024-01-15', time: '10:00', type: 'Consultation initiale', status: 'Terminé', notes: 'Première séance. Patient anxieux concernant stress professionnel.' },
+        { id: 2, date: '2024-01-22', time: '14:30', type: 'Suivi', status: 'Terminé', notes: 'Amélioration notable. Exercices de respiration pratiqués.' },
+        { id: 3, date: '2024-02-05', time: '10:00', type: 'Suivi', status: 'Terminé', notes: 'Patient plus serein. Discussion sur gestion du temps.' },
+        { id: 4, date: '2024-02-19', time: '15:00', type: 'Suivi', status: 'À venir', notes: '' }
+      ],
+      notes: [
+        { id: 1, date: '2024-01-15', title: 'Évaluation initiale', content: 'Troubles anxieux liés au travail. Antécédents familiaux de stress.', category: 'Diagnostic' },
+        { id: 2, date: '2024-01-22', title: 'Observation séance 2', content: 'Bonne réceptivité aux techniques de relaxation. Sommeil amélioré.', category: 'Suivi' },
+        { id: 3, date: '2024-02-05', title: 'Plan thérapeutique', content: 'Objectif : réduction stress sur 3 mois. Techniques TCC recommandées.', category: 'Plan' }
+      ],
+      payments: [
+        { id: 1, date: '2024-01-15', amount: 60, method: 'Carte bancaire', status: 'Payé', invoice: 'INV-2024-001' },
+        { id: 2, date: '2024-01-22', amount: 60, method: 'Espèces', status: 'Payé', invoice: 'INV-2024-012' },
+        { id: 3, date: '2024-02-05', amount: 60, method: 'Carte bancaire', status: 'Payé', invoice: 'INV-2024-023' },
+        { id: 4, date: '2024-02-19', amount: 60, method: '', status: 'En attente', invoice: '' }
+      ],
+      documents: [
+        { id: 1, name: 'Ordonnance_15-01-2024.pdf', date: '2024-01-15', type: 'Ordonnance', size: '245 KB' },
+        { id: 2, name: 'Bilan_psychologique.pdf', date: '2024-01-15', type: 'Bilan', size: '1.2 MB' },
+        { id: 3, name: 'Consentement_traitement.pdf', date: '2024-01-15', type: 'Consentement', size: '180 KB' }
+      ]
+    });
+    setPatientDetailsOpen(true);
+  };
+
+  // Filtrer les patients selon la recherche
+  const filteredPatients = patients.filter(patient =>
+    patient.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    patient.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    patient.phone.includes(searchTerm)
+  );
+
+  // Calculer les statistiques du patient sélectionné
+  const getPatientStats = () => {
+    if (!selectedPatient) return null;
+    
+    const completedAppointments = patientHistory.appointments.filter(a => a.status === 'Terminé').length;
+    const totalPaid = patientHistory.payments
+      .filter(p => p.status === 'Payé')
+      .reduce((sum, p) => sum + p.amount, 0);
+    const pendingPayment = patientHistory.payments
+      .filter(p => p.status === 'En attente')
+      .reduce((sum, p) => sum + p.amount, 0);
+
+    return {
+      completedAppointments,
+      totalAppointments: patientHistory.appointments.length,
+      totalPaid,
+      pendingPayment,
+      documentsCount: patientHistory.documents.length,
+      notesCount: patientHistory.notes.length
+    };
+  };
+
   return (
     <div className="max-w-6xl" data-testid="patients-page">
       <div className="flex justify-between items-center mb-6">
