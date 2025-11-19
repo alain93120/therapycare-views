@@ -229,3 +229,19 @@ SPECIALTIES_DESCRIPTIONS = {
         "indications": ["Phobies", "TOCs", "Blocages familiaux", "Comportements automatiques"],
         "methods": ["Analyse stratégique", "Solutions concrètes"]
     },
+
+    # CATÉGORIE 3 — MÉDECINES DOUCES & PRATIQUES NATURELLES
+    "Naturopathe": {
+        "category": "medecines-douces",
+        "short_description": "Accompagnement global par des méthodes naturelles pour renforcer l'organisme",
+        "full_description": "Le naturopathe accompagne la personne de manière globale en s'appuyant sur des méthodes naturelles visant à renforcer l'organisme. Il analyse l'hygiène de vie, l'alimentation, le sommeil, la digestion, la gestion du stress et l'équilibre émotionnel du consultant. Il propose ensuite un programme personnalisé intégrant alimentation saine, plantes, huiles essentielles, respiration, vitamines ou relaxation. Cette approche est idéale pour les troubles chroniques, la fatigue, la gestion de poids, la digestion, l'immunité et la prévention des maladies.",
+        "indications": ["Troubles chroniques", "Fatigue", "Gestion de poids", "Digestion", "Immunité", "Prévention"],
+        "methods": ["Alimentation", "Plantes", "Huiles essentielles", "Respiration", "Vitamines", "Relaxation"]
+    },
+    "Phytothérapeute": {
+        "category": "medecines-douces",
+        "short_description": "Utilise les plantes médicinales pour rééquilibrer l'organisme",
+        "full_description": "Le phytothérapeute utilise les plantes médicinales pour rééquilibrer l'organisme et soulager de nombreux troubles. Il connaît les propriétés exactes des plantes, leurs interactions et leurs effets sur le corps. Ses conseils peuvent concerner l'immunité, la digestion, le stress, la circulation sanguine, les douleurs articulaires ou le sommeil. Cette pratique est naturelle, efficace et personnalisée.",
+        "indications": ["Immunité", "Digestion", "Stress", "Circulation", "Douleurs articulaires", "Sommeil"],
+        "methods": ["Plantes médicinales", "Tisanes", "Extraits", "Gélules"]
+    },
