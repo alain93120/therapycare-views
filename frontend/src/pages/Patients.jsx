@@ -268,6 +268,23 @@ const Patients = () => {
           </DialogContent>
         </Dialog>
       </div>
+      
+      {/* Barre de recherche */}
+      {patients.length > 0 && (
+        <div className="mb-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Input
+              type="text"
+              placeholder="Rechercher un patient (nom, email, téléphone)..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 h-11"
+            />
+          </div>
+        </div>
+      )}
+      </div>
 
       {patients.length === 0 ? (
         <Card className="text-center py-16 shadow-md border-0">
