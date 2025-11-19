@@ -130,50 +130,65 @@ backend:
         comment: "20 specialty descriptions loaded from user PDF. Includes full descriptions, indications, methods, and categories. Missing 5 specialties (Constellations familiales, Hypnose spirituelle, Thérapie spirituelle, Thérapie holistique, Sophro-analyse) which were not in the PDF."
 
 frontend:
-  - task: "Dynamic route for specialty detail pages"
+  - task: "Home page registration button update"
     implemented: true
-    working: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Home.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Updated header button from 'Inscription praticien' to 'Inscription' to redirect to new choice page /register. Button now says 'Inscription' and links to /register route."
+
+  - task: "Registration choice page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/RegisterChoice.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "New page at /register with 2 cards (Client and Practitioner). Each card has icon, title, description, 4 feature points with Check icons, and CTA button. Includes login link and proper navigation."
+
+  - task: "Client registration form"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/RegisterClient.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "New client registration form at /register/client with fields: full_name, email, phone, password. Includes terms checkbox, back button to /register, and API call to /api/auth/register/client."
+
+  - task: "Practitioner registration form"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/RegisterPractitioner.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Updated practitioner registration form at /register/practitioner with fields: full_name, email, specialty, phone, password. Includes terms checkbox, back button to /register, and API call to /api/auth/register."
+
+  - task: "Registration routing system"
+    implemented: true
+    working: "NA"
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-      - working: true
+      - working: "NA"
         agent: "main"
-        comment: "Added route /specialite/:name to App.js. Component SpecialtyDetail already existed and is now connected to the router."
-      - working: true
-        agent: "testing"
-        comment: "✅ COMPREHENSIVE TESTING COMPLETED: Dynamic routing works perfectly. Tested all 5 required specialties (Psychologue, Thérapeute de couple, Neuropsychologue, Psychanalyste, Thérapeute ICV). All URLs with encoded characters (é, è, spaces) work correctly. Navigation from /specialites to /specialite/{name} is seamless."
-
-  - task: "Specialty detail page component"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/pages/SpecialtyDetail.jsx"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: true
-        agent: "main"
-        comment: "Component displays specialty name, short description, full description, indications (blue badges), methods (green badges), CTA button to search practitioners, and practitioner count. Tested with Psychologue and Thérapeute de couple - both display correctly."
-      - working: true
-        agent: "testing"
-        comment: "✅ ALL UI ELEMENTS VERIFIED: Tested 5 specialties extensively. Each page correctly displays: H1 title, short description, full description section, indications with blue badges, methods with green badges, CTA button 'Trouver un praticien {specialty}', practitioner count, and back button. Layout is responsive and professional. Error handling works for missing specialties (404 with proper message)."
-
-  - task: "Links from specialties page to detail pages"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/pages/SpecialtiesPage.jsx"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-      - working: true
-        agent: "main"
-        comment: "Replaced button elements with Link components pointing to /specialite/{specialty_name}. All specialty names are now clickable and navigate to their detail pages. Back button also works correctly."
-      - working: true
-        agent: "testing"
-        comment: "✅ NAVIGATION FULLY FUNCTIONAL: All 136 specialty links work correctly. Clicking any specialty from the categories navigates to the correct detail page. Back button 'Retour aux spécialités' returns to /specialites. Header navigation (Spécialités, Rechercher, Connexion) works properly. CTA buttons redirect to /recherche?specialty={name} as expected."
+        comment: "Added 3 new routes: /register (RegisterChoice), /register/client (RegisterClient), /register/practitioner (RegisterPractitioner). All routes properly configured in App.js."
 
 metadata:
   created_by: "main_agent"
