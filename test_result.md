@@ -107,27 +107,33 @@ user_problem_statement: "TherapyCare SaaS application - Testing new registration
 backend:
   - task: "Client registration API endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "New API endpoint /api/auth/register/client created to handle client registrations. Accepts full_name, email, password, phone, user_type fields and stores in database with user_type='client'."
+      - working: true
+        agent: "testing"
+        comment: "✅ API WORKING PERFECTLY: Client registration API endpoint /api/auth/register/client returns HTTP 200 OK. Successfully tested with realistic data (Sophie Martin, sophie.martin@example.com). Backend logs confirm successful POST requests. API accepts all required fields and processes registration correctly."
 
   - task: "Practitioner registration API endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Existing API endpoint /api/auth/register still works for practitioner registrations. Accepts full_name, email, specialty, password, phone fields."
+      - working: true
+        agent: "testing"
+        comment: "✅ API FULLY FUNCTIONAL: Practitioner registration API endpoint /api/auth/register returns HTTP 200 OK. Successfully tested with realistic data (Dr. Pierre Dubois, Psychologue specialty). Backend logs show successful POST requests. API processes all practitioner-specific fields correctly including specialty field."
 
 frontend:
   - task: "Home page registration button update"
