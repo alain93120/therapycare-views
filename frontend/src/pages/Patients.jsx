@@ -384,6 +384,250 @@ const Patients = () => {
           </CardContent>
         </Card>
       )}
+
+      {/* Dialog Détails Patient */}
+      <Dialog open={patientDetailsOpen} onOpenChange={setPatientDetailsOpen}>
+        <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="flex items-start justify-between">
+              <div>
+                <DialogTitle className="text-2xl">{selectedPatient?.full_name}</DialogTitle>
+                <div className="flex items-center space-x-4 mt-2 text-sm text-gray-600">
+                  <div className="flex items-center">
+                    <Mail className="w-4 h-4 mr-1" />
+                    {selectedPatient?.email}
+                  </div>
+                  <div className="flex items-center">
+                    <Phone className="w-4 h-4 mr-1" />
+                    {selectedPatient?.phone}
+                  </div>
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setPatientDetailsOpen(false)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-5 h-5" />
+              </Button>
+            </div>
+          </DialogHeader>
+
+          {/* Statistiques rapides */}
+          {selectedPatient && getPatientStats() && (
+            <div className="grid grid-cols-4 gap-4 my-4">
+              <Card className="border border-blue-100 bg-blue-50">
+                <CardContent className="p-4">
+                  <p className="text-sm text-gray-600 mb-1">Consultations</p>
+                  <p className="text-2xl font-bold text-blue-600">
+                    {getPatientStats().completedAppointments}/{getPatientStats().totalAppointments}
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="border border-green-100 bg-green-50">
+                <CardContent className="p-4">
+                  <p className="text-sm text-gray-600 mb-1">Total payé</p>
+                  <p className="text-2xl font-bold text-green-600">{getPatientStats().totalPaid}€</p>
+                </CardContent>
+              </Card>
+              <Card className="border border-orange-100 bg-orange-50">
+                <CardContent className="p-4">
+                  <p className="text-sm text-gray-600 mb-1">En attente</p>
+                  <p className="text-2xl font-bold text-orange-600">{getPatientStats().pendingPayment}€</p>
+                </CardContent>
+              </Card>
+              <Card className="border border-purple-100 bg-purple-50">
+                <CardContent className="p-4">
+                  <p className="text-sm text-gray-600 mb-1">Documents</p>
+                  <p className="text-2xl font-bold text-purple-600">{getPatientStats().documentsCount}</p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Onglets */}
+          <Tabs defaultValue="appointments" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="appointments">
+                <Calendar className="w-4 h-4 mr-2" />
+                Consultations
+              </TabsTrigger>
+              <TabsTrigger value="notes">
+                <FileText className="w-4 h-4 mr-2" />
+                Notes cliniques
+              </TabsTrigger>
+              <TabsTrigger value="payments">
+                <Euro className="w-4 h-4 mr-2" />
+                Paiements
+              </TabsTrigger>
+              <TabsTrigger value="documents">
+                <FileText className="w-4 h-4 mr-2" />
+                Documents
+              </TabsTrigger>
+            </TabsList>
+
+            {/* Onglet Consultations */}
+            <TabsContent value="appointments" className="space-y-4 mt-4">
+              {patientHistory.appointments.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  <Calendar className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                  <p>Aucune consultation enregistrée</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {patientHistory.appointments.map((appointment) => (
+                    <Card key={appointment.id} className="border">
+                      <CardContent className="p-4">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-3 mb-2">
+                              <Badge variant={appointment.status === 'Terminé' ? 'default' : 'secondary'}>
+                                {appointment.status}
+                              </Badge>
+                              <span className="font-semibold text-gray-900">{appointment.type}</span>
+                            </div>
+                            <div className="flex items-center space-x-4 text-sm text-gray-600 mb-2">
+                              <div className="flex items-center">
+                                <Calendar className="w-4 h-4 mr-1" />
+                                {appointment.date}
+                              </div>
+                              <div className="flex items-center">
+                                <Clock className="w-4 h-4 mr-1" />
+                                {appointment.time}
+                              </div>
+                            </div>
+                            {appointment.notes && (
+                              <p className="text-sm text-gray-700 bg-gray-50 p-3 rounded-lg mt-2">
+                                {appointment.notes}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
+
+            {/* Onglet Notes cliniques */}
+            <TabsContent value="notes" className="space-y-4 mt-4">
+              {patientHistory.notes.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  <FileText className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                  <p>Aucune note clinique</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {patientHistory.notes.map((note) => (
+                    <Card key={note.id} className="border">
+                      <CardContent className="p-4">
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <h4 className="font-semibold text-gray-900">{note.title}</h4>
+                            <p className="text-sm text-gray-500">{note.date}</p>
+                          </div>
+                          <Badge variant="outline">{note.category}</Badge>
+                        </div>
+                        <p className="text-sm text-gray-700 bg-gray-50 p-3 rounded-lg">
+                          {note.content}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+              <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700">
+                <Plus className="w-4 h-4 mr-2" />
+                Ajouter une note
+              </Button>
+            </TabsContent>
+
+            {/* Onglet Paiements */}
+            <TabsContent value="payments" className="mt-4">
+              {patientHistory.payments.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  <Euro className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                  <p>Aucun paiement enregistré</p>
+                </div>
+              ) : (
+                <Card>
+                  <CardContent className="p-0">
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50 border-b">
+                          <tr>
+                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Date</th>
+                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Montant</th>
+                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Méthode</th>
+                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Statut</th>
+                            <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Facture</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {patientHistory.payments.map((payment) => (
+                            <tr key={payment.id} className="border-b last:border-0 hover:bg-gray-50">
+                              <td className="py-3 px-4 text-sm">{payment.date}</td>
+                              <td className="py-3 px-4 text-sm font-semibold">{payment.amount}€</td>
+                              <td className="py-3 px-4 text-sm">{payment.method || '-'}</td>
+                              <td className="py-3 px-4">
+                                <Badge variant={payment.status === 'Payé' ? 'default' : 'secondary'}>
+                                  {payment.status}
+                                </Badge>
+                              </td>
+                              <td className="py-3 px-4 text-sm text-blue-600">
+                                {payment.invoice || '-'}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </TabsContent>
+
+            {/* Onglet Documents */}
+            <TabsContent value="documents" className="space-y-4 mt-4">
+              {patientHistory.documents.length === 0 ? (
+                <div className="text-center py-8 text-gray-500">
+                  <FileText className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                  <p>Aucun document attaché</p>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  {patientHistory.documents.map((doc) => (
+                    <Card key={doc.id} className="border hover:bg-gray-50 cursor-pointer transition">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <FileText className="w-8 h-8 text-blue-600" />
+                            <div>
+                              <p className="font-medium text-gray-900">{doc.name}</p>
+                              <p className="text-sm text-gray-500">
+                                {doc.type} • {doc.date} • {doc.size}
+                              </p>
+                            </div>
+                          </div>
+                          <Button variant="ghost" size="sm">
+                            Télécharger
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+              <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700">
+                <Plus className="w-4 h-4 mr-2" />
+                Ajouter un document
+              </Button>
+            </TabsContent>
+          </Tabs>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
