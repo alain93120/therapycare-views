@@ -180,23 +180,24 @@ const Patients = () => {
   };
 
   return (
-    <div className="max-w-6xl" data-testid="patients-page">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Patients</h1>
-          <p className="text-gray-600 mt-1">{patients.length} patient(s) enregistré(s)</p>
-        </div>
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger asChild>
-            <Button
-              data-testid="add-patient-button"
-              onClick={handleNewPatient}
-              className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg h-11"
-            >
-              <Plus className="w-5 h-5 mr-2" />
-              Ajouter un patient
-            </Button>
-          </DialogTrigger>
+    <div className="max-w-7xl" data-testid="patients-page">
+      <div className="mb-6">
+        <div className="flex justify-between items-center mb-4">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Patients</h1>
+            <p className="text-gray-600 mt-1">{patients.length} patient(s) enregistré(s)</p>
+          </div>
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button
+                data-testid="add-patient-button"
+                onClick={handleNewPatient}
+                className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg h-11"
+              >
+                <Plus className="w-5 h-5 mr-2" />
+                Ajouter un patient
+              </Button>
+            </DialogTrigger>
           <DialogContent className="sm:max-w-[500px]">
             <DialogHeader>
               <DialogTitle>{editingPatient ? 'Éditer le patient' : 'Nouveau patient'}</DialogTitle>
