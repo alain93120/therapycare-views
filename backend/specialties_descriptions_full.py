@@ -143,3 +143,89 @@ SPECIALTIES_DESCRIPTIONS = {
         "indications": ["Phobies simples", "Phobie sociale", "Agoraphobie", "Claustrophobie", "Peur de l'avion"],
         "methods": ["TCC", "Exposition progressive", "EMDR", "Hypnose", "Réalité virtuelle"]
     },
+
+    # CATÉGORIE 2 — HYPNOSE & THÉRAPIES BRÈVES
+    "Hypnothérapeute": {
+        "category": "hypnose",
+        "short_description": "Accompagne par l'hypnose pour gérer stress, tabac et anxiété",
+        "full_description": "L'hypnothérapeute accompagne la personne en utilisant l'hypnose, un état de conscience modifié permettant d'accéder aux ressources internes. Cette méthode est particulièrement efficace pour gérer le stress, arrêter le tabac, diminuer l'anxiété, améliorer le sommeil ou travailler sur la confiance en soi. En modifiant les automatismes et les croyances profondes, l'hypnothérapie permet un changement durable et naturel.",
+        "indications": ["Stress", "Tabagisme", "Anxiété", "Troubles du sommeil", "Confiance en soi"],
+        "methods": ["Hypnose Ericksonienne", "Hypnose classique", "Hypnose humaniste"]
+    },
+    "Praticien en Hypnose": {
+        "category": "hypnose",
+        "short_description": "Techniques d'hypnose pour transformations rapides",
+        "full_description": "Le praticien en hypnose utilise des techniques d'hypnose Ericksonienne, humaniste ou classique pour provoquer des transformations rapides. Il aide à dépasser blocages, peurs, douleurs ou traumatismes légers en amenant le patient dans un état de détente consciente. Les séances sont personnalisées en fonction des objectifs (stress, minceur, tabagisme, gestion émotionnelle).",
+        "indications": ["Blocages", "Peurs", "Douleurs", "Traumatismes légers", "Gestion émotionnelle"],
+        "methods": ["Hypnose Ericksonienne", "Hypnose humaniste", "Hypnose classique"]
+    },
+    "Praticien EMDR": {
+        "category": "hypnose",
+        "short_description": "Thérapie pour traiter les traumatismes par stimulations bilatérales",
+        "full_description": "L'EMDR est une thérapie reconnue scientifiquement pour traiter les traumatismes, chocs émotionnels, phobies et anxiété. Elle utilise des stimulations bilatérales (mouvements oculaires, sons, tapotements) pour aider le cerveau à retraiter les souvenirs traumatiques. Les résultats sont souvent rapides et impressionnants, même dans des cas profondément ancrés.",
+        "indications": ["Traumatismes", "Chocs émotionnels", "Phobies", "Anxiété", "Stress post-traumatique"],
+        "methods": ["EMDR", "Stimulations bilatérales", "Retraitement des souvenirs"]
+    },
+    "Praticien EFT": {
+        "category": "hypnose",
+        "short_description": "Libération émotionnelle par tapotements sur points énergétiques",
+        "full_description": "L'EFT combine psychologie et stimulation de points énergétiques (tapotements) pour libérer les émotions négatives. Cette méthode agit sur les blocages liés au stress, aux peurs, à la colère, aux traumatismes légers ou à la confiance en soi. Les séances peuvent être très efficaces en quelques minutes seulement.",
+        "indications": ["Stress", "Peurs", "Colère", "Traumatismes légers", "Confiance en soi"],
+        "methods": ["EFT", "Tapotements", "Stimulation de points énergétiques"]
+    },
+    "Praticien en Thérapies Brèves": {
+        "category": "hypnose",
+        "short_description": "Résolution rapide de problèmes spécifiques",
+        "full_description": "Les thérapies brèves visent à résoudre un problème spécifique en un nombre limité de séances. Basées sur l'efficacité et la rapidité, elles se concentrent sur le présent et les solutions plutôt que sur l'analyse du passé. Elles sont idéales pour les personnes souhaitant des résultats rapides : phobies, stress, émotions, conflits, comportements.",
+        "indications": ["Phobies", "Stress", "Émotions", "Conflits", "Comportements"],
+        "methods": ["PNL", "Hypnose", "TCC", "Approche systémique"]
+    },
+    "Praticien PNL": {
+        "category": "hypnose",
+        "short_description": "Reprogrammation des schémas de pensées négatifs",
+        "full_description": "La PNL explore la manière dont le cerveau fonctionne, perçoit, réagit et crée ses habitudes. Elle permet de reprogrammer les schémas de pensées négatifs, de développer de nouvelles ressources mentales et d'améliorer la communication. Très utilisée dans les domaines du bien-être, du coaching, de la performance ou de la confiance en soi.",
+        "indications": ["Schémas de pensées négatifs", "Communication", "Confiance en soi", "Performance"],
+        "methods": ["PNL", "Reprogrammation mentale", "Techniques de communication"]
+    },
+    "Praticien en Respiration Holotropique": {
+        "category": "hypnose",
+        "short_description": "Transformation intérieure par respiration amplifiée",
+        "full_description": "La respiration holotropique est une technique puissante de transformation intérieure basée sur une respiration amplifiée. Elle permet de libérer les traumatismes, d'accéder à des états modifiés de conscience et de reconnecter des parties profondes de soi. Cette méthode aide à comprendre les émotions refoulées, apaiser l'anxiété et obtenir des prises de conscience majeures.",
+        "indications": ["Traumatismes", "Émotions refoulées", "Anxiété", "Prises de conscience"],
+        "methods": ["Respiration holotropique", "États modifiés de conscience"]
+    },
+    "Praticien Rebirth": {
+        "category": "hypnose",
+        "short_description": "Respiration circulaire pour libérer tensions émotionnelles",
+        "full_description": "Le Rebirth utilise une respiration circulaire consciente pour libérer les tensions émotionnelles et somatiques. Il permet d'accéder à des mémoires enfouies, de nettoyer le stress accumulé et de retrouver une sensation de calme profond. Très favorable à la libération des blocages liés à l'enfance ou aux schémas répétitifs.",
+        "indications": ["Tensions émotionnelles", "Blocages enfance", "Schémas répétitifs", "Stress accumulé"],
+        "methods": ["Rebirth", "Respiration circulaire consciente"]
+    },
+    "Praticien en Cohérence Cardiaque": {
+        "category": "hypnose",
+        "short_description": "Régulation du système nerveux par la respiration",
+        "full_description": "La cohérence cardiaque est une méthode de respiration simple et efficace pour réguler le système nerveux. Elle réduit le stress, améliore le sommeil, diminue l'anxiété et renforce la clarté mentale. Le praticien enseigne les bonnes techniques, adapte les exercices et suit l'évolution du patient.",
+        "indications": ["Stress", "Anxiété", "Troubles du sommeil", "Clarté mentale"],
+        "methods": ["Cohérence cardiaque", "Respiration contrôlée"]
+    },
+    "Thérapeute en Approche Solutionniste": {
+        "category": "hypnose",
+        "short_description": "Focus sur les ressources et solutions existantes",
+        "full_description": "Cette approche vise à se concentrer sur ce qui fonctionne déjà plutôt que sur les problèmes. Le thérapeute aide à identifier les ressources internes, les réussites passées et les leviers de changement. Elle est courte, efficace et particulièrement utile pour les personnes qui veulent avancer sans se perdre dans les explications.",
+        "indications": ["Avancement rapide", "Identification des ressources", "Solutions"],
+        "methods": ["Approche solutionniste", "Identification des ressources"]
+    },
+    "Thérapeute Orienté Objectifs": {
+        "category": "hypnose",
+        "short_description": "Changements rapides centrés sur des objectifs précis",
+        "full_description": "Spécialiste des changements rapides centrés sur des objectifs précis : arrêter une addiction, perdre du poids, gérer une émotion, préparer un examen. Il utilise des méthodes brèves et mesurables. Cette approche est très adaptée aux personnes qui souhaitent progresser efficacement.",
+        "indications": ["Addictions", "Perte de poids", "Gestion des émotions", "Préparation d'examens"],
+        "methods": ["Méthodes brèves", "Approche par objectifs"]
+    },
+    "Thérapeute Stratégique": {
+        "category": "hypnose",
+        "short_description": "Analyse et rupture des schémas répétitifs",
+        "full_description": "Il analyse le fonctionnement du problème et propose des solutions concrètes pour rompre les schémas répétitifs. Très utilisée pour les phobies, tocs, blocages familiaux et comportements automatiques.",
+        "indications": ["Phobies", "TOCs", "Blocages familiaux", "Comportements automatiques"],
+        "methods": ["Analyse stratégique", "Solutions concrètes"]
+    },
