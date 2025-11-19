@@ -86,6 +86,33 @@ class PractitionerUpdate(BaseModel):
     city: Optional[str] = None
     photo_url: Optional[str] = None
 
+class Client(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    full_name: str
+    email: EmailStr
+    phone: Optional[str] = ""
+    user_type: str = "client"
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ClientRegister(BaseModel):
+    full_name: str
+    email: EmailStr
+    password: str
+    phone: Optional[str] = ""
+    user_type: str = "client"
+
+class ClientPublic(BaseModel):
+    id: str
+    full_name: str
+    email: EmailStr
+    phone: str
+    user_type: str
+
+class ClientTokenResponse(BaseModel):
+    token: str
+    client: ClientPublic
+
 class Patient(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
