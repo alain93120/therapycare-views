@@ -64,9 +64,9 @@ const RegisterPractitioner = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <Link to="/" className="inline-flex items-center text-gray-600 hover:text-blue-600 mb-6 transition">
+        <Link to="/register" className="inline-flex items-center text-gray-600 hover:text-blue-600 mb-6 transition">
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Retour à l'accueil
+          Retour
         </Link>
 
         <Card className="shadow-xl border-0" data-testid="register-card">
