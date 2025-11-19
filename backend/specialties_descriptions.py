@@ -245,3 +245,15 @@ SPECIALTIES_DESCRIPTIONS = {
         "indications": ["Immunité", "Digestion", "Stress", "Circulation", "Douleurs articulaires", "Sommeil"],
         "methods": ["Plantes médicinales", "Tisanes", "Extraits", "Gélules"]
     },
+}
+
+def get_specialty_description(specialty_name):
+    """Retourne la description complète d'une spécialité"""
+    return SPECIALTIES_DESCRIPTIONS.get(specialty_name)
+
+def get_specialties_by_category(category_slug):
+    """Retourne toutes les spécialités d'une catégorie avec leurs descriptions"""
+    return {
+        name: desc for name, desc in SPECIALTIES_DESCRIPTIONS.items()
+        if desc.get("category") == category_slug
+    }
