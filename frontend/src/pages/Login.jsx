@@ -53,11 +53,17 @@ const Login = () => {
 
         <Card className="shadow-xl border-0" data-testid="login-card">
           <CardHeader className="text-center pb-6 pt-8">
-            <div className="mx-auto w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
-              <Calendar className="w-7 h-7 text-white" />
+            <div className="mx-auto mb-4">
+              <div className="relative inline-block">
+                <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+                  Therapy
+                </span>
+                <span className="text-3xl font-bold text-gray-900">Care</span>
+                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></div>
+              </div>
             </div>
-            <CardTitle className="text-2xl font-bold text-gray-900">Connexion praticien</CardTitle>
-            <p className="text-gray-600 text-sm mt-2">Accédez à votre espace professionnel</p>
+            <CardTitle className="text-2xl font-bold text-gray-900">Connexion</CardTitle>
+            <p className="text-gray-600 text-sm mt-2">Accédez à votre espace</p>
           </CardHeader>
           <CardContent className="px-8 pb-8">
             <form onSubmit={handleSubmit} className="space-y-4">
