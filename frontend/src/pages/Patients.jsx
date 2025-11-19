@@ -19,11 +19,22 @@ const Patients = () => {
   const [loading, setLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingPatient, setEditingPatient] = useState(null);
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [patientDetailsOpen, setPatientDetailsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const [formData, setFormData] = useState({
     full_name: '',
     email: '',
     phone: '',
     notes: ''
+  });
+  
+  // Données mock pour l'historique (à remplacer par vraies données API)
+  const [patientHistory, setPatientHistory] = useState({
+    appointments: [],
+    notes: [],
+    payments: [],
+    documents: []
   });
 
   useEffect(() => {
