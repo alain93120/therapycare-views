@@ -190,4 +190,4 @@ const RegisterPractitioner = () => {
   );
 };
 
-export default Register;
+export default RegisterPractitioner;
