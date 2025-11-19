@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "TherapyCare SaaS application for therapists with specialty detail pages"
+user_problem_statement: "TherapyCare SaaS application - Testing new registration system with Client/Practitioner choice"
 
 backend:
   - task: "Specialty detail API endpoint"
