@@ -105,29 +105,29 @@
 user_problem_statement: "TherapyCare SaaS application - Testing new registration system with Client/Practitioner choice"
 
 backend:
-  - task: "Specialty detail API endpoint"
+  - task: "Client registration API endpoint"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-      - working: true
+      - working: "NA"
         agent: "main"
-        comment: "API endpoint /api/specialties/{specialty_name} already exists and returns specialty descriptions from specialties_descriptions.py. Tested with curl for Psychologue, Thérapeute ICV, and Neuropsychologue - all working correctly."
+        comment: "New API endpoint /api/auth/register/client created to handle client registrations. Accepts full_name, email, password, phone, user_type fields and stores in database with user_type='client'."
 
-  - task: "Specialty descriptions data"
+  - task: "Practitioner registration API endpoint"
     implemented: true
-    working: true
-    file: "/app/backend/specialties_descriptions.py"
+    working: "NA"
+    file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-      - working: true
+      - working: "NA"
         agent: "main"
-        comment: "20 specialty descriptions loaded from user PDF. Includes full descriptions, indications, methods, and categories. Missing 5 specialties (Constellations familiales, Hypnose spirituelle, Thérapie spirituelle, Thérapie holistique, Sophro-analyse) which were not in the PDF."
+        comment: "Existing API endpoint /api/auth/register still works for practitioner registrations. Accepts full_name, email, specialty, password, phone fields."
 
 frontend:
   - task: "Home page registration button update"
