@@ -321,25 +321,41 @@ const Patients = () => {
                       }`}
                     >
                       <td className="py-4 px-6">
-                        <p className="font-medium text-gray-900">{patient.full_name}</p>
-                        {patient.notes && (
-                          <p className="text-sm text-gray-500 mt-1 truncate max-w-xs">{patient.notes}</p>
-                        )}
-                      </td>
-                      <td className="py-4 px-6">
-                        <div className="flex items-center text-gray-700">
-                          <Mail className="w-4 h-4 mr-2 text-gray-400" />
-                          {patient.email}
+                        <div>
+                          <p className="font-medium text-gray-900">{patient.full_name}</p>
+                          {patient.notes && (
+                            <p className="text-sm text-gray-500 mt-1 line-clamp-1">{patient.notes}</p>
+                          )}
                         </div>
                       </td>
                       <td className="py-4 px-6">
-                        <div className="flex items-center text-gray-700">
-                          <Phone className="w-4 h-4 mr-2 text-gray-400" />
-                          {patient.phone}
+                        <div className="space-y-1">
+                          <div className="flex items-center text-sm text-gray-700">
+                            <Mail className="w-4 h-4 mr-2 text-gray-400" />
+                            {patient.email}
+                          </div>
+                          <div className="flex items-center text-sm text-gray-700">
+                            <Phone className="w-4 h-4 mr-2 text-gray-400" />
+                            {patient.phone}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-4 px-6">
+                        <div className="flex items-center text-sm text-gray-600">
+                          <Calendar className="w-4 h-4 mr-2 text-gray-400" />
+                          {patient.last_visit || 'Aucune visite'}
                         </div>
                       </td>
                       <td className="py-4 px-6 text-right">
-                        <div className="flex items-center justify-end space-x-2">
+                        <div className="flex items-center justify-end space-x-1">
+                          <Button
+                            onClick={() => handleViewDetails(patient)}
+                            variant="ghost"
+                            size="sm"
+                            className="text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                          >
+                            <Eye className="w-4 h-4" />
+                          </Button>
                           <Button
                             data-testid={`edit-patient-${patient.id}`}
                             onClick={() => handleEdit(patient)}
