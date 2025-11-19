@@ -45,7 +45,7 @@ const Home = () => {
                 <Button variant="ghost" data-testid="header-login-btn" className="text-gray-700 hover:text-blue-600">Connexion</Button>
               </Link>
               <Link to="/register">
-                <Button data-testid="header-register-btn" className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Inscription praticien</Button>
+                <Button data-testid="header-register-btn" className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Inscription</Button>
               </Link>
             </div>
           </div>
