@@ -306,13 +306,13 @@ const Patients = () => {
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
                     <th className="text-left py-4 px-6 font-semibold text-gray-700 text-sm">Nom</th>
-                    <th className="text-left py-4 px-6 font-semibold text-gray-700 text-sm">Email</th>
-                    <th className="text-left py-4 px-6 font-semibold text-gray-700 text-sm">Téléphone</th>
+                    <th className="text-left py-4 px-6 font-semibold text-gray-700 text-sm">Contact</th>
+                    <th className="text-left py-4 px-6 font-semibold text-gray-700 text-sm">Dernière visite</th>
                     <th className="text-right py-4 px-6 font-semibold text-gray-700 text-sm">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {patients.map((patient, index) => (
+                  {filteredPatients.map((patient, index) => (
                     <tr
                       key={patient.id}
                       data-testid={`patient-row-${patient.id}`}
