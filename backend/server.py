@@ -243,6 +243,38 @@ async def register(input: PractitionerRegister):
         practitioner=PractitionerPublic(**practitioner.model_dump())
     )
 
+@api_router.post("/auth/register/client", response_model=ClientTokenResponse)
+async def register_client(input: ClientRegister):
+    # Check if email exists in clients collection
+    existing = await db.clients.find_one({"email": input.email})
+    if existing:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    # Also check in practitioners collection to avoid duplicates
+    existing_practitioner = await db.practitioners.find_one({"email": input.email})
+    if existing_practitioner:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    # Create client
+    client = Client(
+        full_name=input.full_name,
+        email=input.email,
+        phone=input.phone or "",
+        user_type="client"
+    )
+    
+    doc = client.model_dump()
+    doc['password'] = hash_password(input.password)
+    doc['created_at'] = doc['created_at'].isoformat()
+    
+    await db.clients.insert_one(doc)
+    
+    token = create_token(client.id)
+    return ClientTokenResponse(
+        token=token,
+        client=ClientPublic(**client.model_dump())
+    )
+
 @api_router.post("/auth/login", response_model=TokenResponse)
 async def login(input: PractitionerLogin):
     practitioner = await db.practitioners.find_one({"email": input.email}, {"_id": 0})
