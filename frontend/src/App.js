@@ -37,6 +37,7 @@ function App() {
           <Route path="/specialites" element={<SpecialtiesPage />} />
           <Route path="/specialite/:name" element={<SpecialtyDetail />} />
           <Route path="/recherche" element={<SearchPractitioners />} />
+          <Route path="/praticiens" element={<FindPractitioner />} />
           <Route path="/a-propos" element={<About />} />
           <Route path="/register" element={<RegisterChoice />} />
           <Route path="/register/client" element={<RegisterClient />} />
