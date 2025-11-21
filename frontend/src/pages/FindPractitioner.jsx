@@ -96,11 +96,11 @@ const FindPractitioner = () => {
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center">
               <div className="relative">
-                <span className="text-2xl font-bold bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
                   Therapy
                 </span>
                 <span className="text-2xl font-bold text-gray-900">Care</span>
-                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-teal-500 to-teal-400 rounded-full"></div>
+                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></div>
               </div>
             </Link>
             
