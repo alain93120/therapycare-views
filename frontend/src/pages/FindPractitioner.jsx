@@ -206,7 +206,7 @@ const FindPractitioner = () => {
               return (
                 <Card 
                   key={practitioner.id} 
-                  className="group hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-teal-200 rounded-3xl overflow-hidden"
+                  className="group hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-blue-200 rounded-3xl overflow-hidden"
                 >
                   <CardContent className="p-6">
                     {/* Profile Section */}
