@@ -125,7 +125,7 @@ const FindPractitioner = () => {
                 placeholder="Spécialité, praticien..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-12 h-14 rounded-2xl border-gray-200 focus:border-teal-500 focus:ring-teal-500"
+                className="pl-12 h-14 rounded-2xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
@@ -137,7 +137,7 @@ const FindPractitioner = () => {
                 placeholder="Ville, code postal..."
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="pl-12 h-14 rounded-2xl border-gray-200 focus:border-teal-500 focus:ring-teal-500"
+                className="pl-12 h-14 rounded-2xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
