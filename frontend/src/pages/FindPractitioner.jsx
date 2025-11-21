@@ -144,7 +144,7 @@ const FindPractitioner = () => {
             {/* Search Button */}
             <Button
               onClick={handleSearch}
-              className="h-14 px-8 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white rounded-2xl font-semibold shadow-lg shadow-teal-500/30 transition-all"
+              className="h-14 px-8 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-2xl font-semibold shadow-lg shadow-blue-500/30 transition-all"
             >
               <Search className="w-5 h-5 mr-2" />
               Rechercher
