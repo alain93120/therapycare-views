@@ -28,13 +28,28 @@ const FindPractitioner = () => {
   const fetchPractitioners = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API}/practitioners/search`, {
+      const response = await axios.get(`${API}/public/practitioners`, {
         params: {
           specialty: searchTerm || undefined,
           city: location || undefined
         }
       });
-      setPractitioners(response.data);
+      
+      // Filter based on search terms if provided
+      let filtered = response.data;
+      if (searchTerm) {
+        filtered = filtered.filter(p => 
+          p.specialty.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          p.full_name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+      if (location) {
+        filtered = filtered.filter(p => 
+          p.city && p.city.toLowerCase().includes(location.toLowerCase())
+        );
+      }
+      
+      setPractitioners(filtered);
     } catch (error) {
       console.error('Error fetching practitioners:', error);
     } finally {
