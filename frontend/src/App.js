@@ -5,6 +5,7 @@ import About from './pages/About';
 import SpecialtiesPage from './pages/SpecialtiesPage';
 import SpecialtyDetail from './pages/SpecialtyDetail';
 import SearchPractitioners from './pages/SearchPractitioners';
+import FindPractitioner from './pages/FindPractitioner';
 import RegisterChoice from './pages/RegisterChoice';
 import RegisterClient from './pages/RegisterClient';
 import RegisterPractitioner from './pages/RegisterPractitioner';
