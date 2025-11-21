@@ -105,9 +105,9 @@ const FindPractitioner = () => {
             </Link>
             
             <nav className="hidden md:flex space-x-8">
-              <Link to="/" className="text-gray-700 hover:text-teal-600 font-medium transition">Accueil</Link>
-              <Link to="/specialites" className="text-gray-700 hover:text-teal-600 font-medium transition">Spécialités</Link>
-              <Link to="/login" className="text-gray-700 hover:text-teal-600 font-medium transition">Connexion</Link>
+              <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium transition">Accueil</Link>
+              <Link to="/specialites" className="text-gray-700 hover:text-blue-600 font-medium transition">Spécialités</Link>
+              <Link to="/login" className="text-gray-700 hover:text-blue-600 font-medium transition">Connexion</Link>
             </nav>
           </div>
         </div>
